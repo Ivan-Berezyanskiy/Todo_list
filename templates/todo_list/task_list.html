@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  Task List
+  {% if task_list %}
+    {% for task in task_list %}
+      <h1>{{ task.content }}</h1>
+    {% endfor %}
+  {% else %}
+    No tasks
+  {% endif %}
+{% endblock %}
