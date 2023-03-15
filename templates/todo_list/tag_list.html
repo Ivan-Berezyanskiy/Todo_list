@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>
-    Tag List
+    Tags
     <a href="{% url "todo_list:tag-create" %}" class="btn btn-primary link-to-page">
       Create
     </a>
@@ -29,7 +29,7 @@
             </td>
             <td>
               <a class="btn btn-danger"
-                href="{% url "todo_list:tag-list" %}">
+                href="{% url "todo_list:tag-delete" pk=tag.id %}">
                 Delete
               </a>
             </td>
