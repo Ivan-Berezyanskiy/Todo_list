@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 
 from .views import (
@@ -5,7 +7,8 @@ from .views import (
     TagListView,
     TagCreateView,
     TagUpdateView,
-    TagDeleteView
+    TagDeleteView,
+    task_status_change, TaskDeleteView, TaskCreateView, TaskUpdateView
 )
 
 urlpatterns = [
@@ -13,6 +16,11 @@ urlpatterns = [
         "",
         TaskListView.as_view(),
         name="index"
+    ),
+    path(
+        "task/<int:pk>/done-undone/",
+        task_status_change,
+        name="done-undone",
     ),
     path(
         "tags/",
@@ -30,10 +38,25 @@ urlpatterns = [
         name="tag-update"
     ),
     path(
+        "task/<int:pk>/delete",
+        TaskDeleteView.as_view(),
+        name="task-delete"
+    ),
+    path(
+        "task/<int:pk>/update",
+        TaskUpdateView.as_view(),
+        name="task-update"
+    ),
+    path(
+        "task/create",
+        TaskCreateView.as_view(),
+        name="task-create"
+    ),
+    path(
         "tags/<int:pk>/delete",
         TagDeleteView.as_view(),
         name="tag-delete"
     ),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 app_name = "todo_list"
