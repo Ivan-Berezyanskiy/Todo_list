@@ -3,15 +3,21 @@
 
 {% block content %}
   Task List
+   <a href="{% url "todo_list:task-create" %}" class="btn btn-primary link-to-page">Create</a>
   {% if task_list %}
       <hr>
     {% for task in task_list %}
       <h2><strong>{{ task.content }}</strong></h2>
-        {% if task.is_done %}
-          <p>Done<a href="{% url "todo_list:done-undone" pk=task.pk %}" class="btn btn-secondary link-to-page">Undo</a></p>
-        {% else %}
-          <p>In process<a href="{% url "todo_list:done-undone" pk=task.pk %}" class="btn btn-success link-to-page">Complete</a></p>
-        {% endif %}
+          <form action="{% url "todo_list:done-undone" pk=task.id %}" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            {% if task.is_done %}
+              <p>Done<input type="submit" value="Undo" class="btn btn-success link-to-page"></p>
+            {% else %}
+              <p>In process<input type="submit" value="Complete" class="btn btn-success link-to-page"></p>
+            {% endif %}
+          </form>
       <p>
         Created at {{ task.datetime }}
         {% if task.deadline != None %}

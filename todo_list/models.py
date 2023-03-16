@@ -9,7 +9,7 @@ class Tag(models.Model):
 
 class Task(models.Model):
     content = models.TextField()
-    datetime = models.DateTimeField(auto_now_add=True, null=True)
+    datetime = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(blank=True, null=True)
     is_done = models.BooleanField(default=False)
     tags = models.ManyToManyField(to=Tag, related_name="tasks")
