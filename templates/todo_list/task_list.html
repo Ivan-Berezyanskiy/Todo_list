@@ -13,9 +13,9 @@
             {{ form|crispy }}
             <br>
             {% if task.is_done %}
-              <p>Done<input type="submit" value="Undo" class="btn btn-success link-to-page"></p>
+              <p>Done <input type="submit" value="Undo" class="btn btn-danger link-to-page"></p>
             {% else %}
-              <p>In process<input type="submit" value="Complete" class="btn btn-success link-to-page"></p>
+              <p>In process <input type="submit" value="Complete" class="btn btn-success link-to-page"></p>
             {% endif %}
           </form>
       <p>

@@ -8,6 +8,15 @@ TASK_URL = reverse("todo_list:index")
 TAG_URL = reverse("todo_list:tag-list")
 
 
+class ModelTests(TestCase):
+    def test_tag_str_return(self):
+        tag_name = "test1"
+        tag = Tag.objects.create(
+            name=tag_name,
+        )
+        self.assertEqual(tag.name, tag_name)
+
+
 class DataTasksTests(TestCase):
     def test_get_tasks_data(self):
         response = self.client.get(TASK_URL)
